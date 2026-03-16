@@ -1,0 +1,906 @@
+<!DOCTYPE html>
+<html lang="fr" dir="ltr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Arvea Velours Store</title>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;0,700;1,400;1,600&family=Jost:wght@300;400;500;600&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<style>
+:root{--cream:#FAF6F0;--cream2:#F2EBE0;--gold:#B8965A;--gold-light:#D4AE72;--gold-pale:#F5EDD8;--rose:#D4907A;--rose-pale:#FDF0EC;--black:#1A1208;--brown:#4A3728;--gray:#8A7A6A;--gray-light:#C8BEB2;--shadow:0 8px 40px rgba(26,18,8,.1);--shadow-lg:0 20px 60px rgba(26,18,8,.15)}
+[lang="ar"]{direction:rtl}
+*{margin:0;padding:0;box-sizing:border-box}html{scroll-behavior:smooth}
+body{font-family:'Jost',sans-serif;background:var(--cream);color:var(--black);overflow-x:hidden;cursor:none}
+.cur{width:8px;height:8px;background:var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9999;transform:translate(-50%,-50%);transition:transform .12s}
+.cur-ring{width:32px;height:32px;border:1px solid var(--gold);border-radius:50%;position:fixed;pointer-events:none;z-index:9998;transform:translate(-50%,-50%);transition:all .2s ease;opacity:.6}
+.lang-bar{background:var(--black);padding:8px 5%;display:flex;justify-content:flex-end;gap:.8rem}
+.lang-btn{background:none;border:1px solid rgba(255,255,255,.2);color:rgba(255,255,255,.6);padding:4px 14px;font-size:.7rem;font-family:'Jost',sans-serif;letter-spacing:.1em;cursor:none;transition:all .2s}
+.lang-btn.active,.lang-btn:hover{border-color:var(--gold);color:var(--gold)}
+nav{position:sticky;top:0;z-index:100;background:rgba(250,246,240,.96);backdrop-filter:blur(16px);border-bottom:1px solid rgba(184,150,90,.15)}
+.nav-inner{padding:16px 5%;display:flex;justify-content:space-between;align-items:center;gap:1rem}
+.nav-logo{font-family:'Cormorant Garamond',serif;font-size:1.4rem;font-weight:700;letter-spacing:.06em;color:var(--black);text-decoration:none;flex-shrink:0}
+.nav-logo span{color:var(--gold)}.nav-logo em{color:var(--rose);font-style:italic}
+.nav-links{display:flex;gap:1.5rem;list-style:none;align-items:center}
+.nav-links>li>a{text-decoration:none;font-size:.77rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray);transition:color .2s;cursor:none;display:flex;align-items:center;gap:4px}
+.nav-links>li>a:hover{color:var(--gold)}
+.nav-cta{background:var(--gold)!important;color:white!important;padding:9px 22px;border-radius:4px}
+.nav-cta:hover{background:var(--brown)!important}
+/* DROPDOWN */
+.nav-item-drop{position:relative}
+.drop-arrow{font-size:.5rem;opacity:.5;transition:transform .2s}
+.nav-item-drop:hover .drop-arrow{transform:rotate(180deg)}
+.nav-dropdown{position:absolute;top:calc(100% + 10px);left:50%;transform:translateX(-50%) translateY(-4px);background:#fff;border-radius:18px;box-shadow:var(--shadow-lg);border:1px solid rgba(184,150,90,.12);padding:.8rem;min-width:250px;opacity:0;pointer-events:none;transition:opacity .22s,transform .22s;z-index:200}
+.nav-item-drop:hover .nav-dropdown{opacity:1;pointer-events:all;transform:translateX(-50%) translateY(0)}
+.drop-sec{font-size:.6rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--gray-light);padding:.3rem .8rem .4rem;margin-top:.4rem}
+.drop-sec:first-child{margin-top:0}
+.drop-btn{display:flex;align-items:center;gap:.5rem;padding:.5rem .8rem;border-radius:10px;font-size:.77rem;font-weight:500;color:var(--brown);cursor:none;border:none;background:none;width:100%;text-align:left;transition:background .18s;font-family:'Jost',sans-serif}
+.drop-btn:hover{background:var(--gold-pale);color:var(--gold)}
+.drop-sep{height:1px;background:rgba(184,150,90,.1);margin:.4rem 0}
+/* SEARCH */
+.nav-search{display:flex;align-items:center;gap:.5rem;background:var(--cream2);border:1px solid rgba(184,150,90,.2);padding:7px 14px;border-radius:100px}
+.nav-search input{background:none;border:none;outline:none;font-size:.78rem;font-family:'Jost',sans-serif;color:var(--black);width:140px}
+.nav-search input::placeholder{color:var(--gray-light)}
+/* HERO */
+.hero{min-height:88vh;display:flex;align-items:center;padding:0 5%;position:relative;overflow:hidden;background:linear-gradient(135deg,var(--cream),var(--cream2))}
+.hero-pattern{position:absolute;inset:0;background-image:radial-gradient(rgba(184,150,90,.06) 1.5px,transparent 1.5px);background-size:28px 28px}
+.hero-blob{position:absolute;right:-8%;top:-10%;width:700px;height:700px;background:radial-gradient(circle,rgba(212,144,122,.08),transparent 65%);border-radius:50%}
+.hero-blob2{position:absolute;left:-5%;bottom:-15%;width:500px;height:500px;background:radial-gradient(circle,rgba(184,150,90,.07),transparent 65%);border-radius:50%}
+.hero-content{position:relative;z-index:2;max-width:580px}
+.hero-badge{display:inline-flex;align-items:center;gap:8px;background:var(--gold-pale);border:1px solid rgba(184,150,90,.3);padding:7px 18px;border-radius:100px;font-size:.72rem;font-weight:600;letter-spacing:.1em;text-transform:uppercase;color:var(--gold);margin-bottom:2rem}
+.bdot{width:6px;height:6px;background:var(--rose);border-radius:50%;animation:blink 1.4s ease infinite}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero h1{font-family:'Cormorant Garamond',serif;font-size:clamp(3rem,6vw,5.5rem);font-weight:700;line-height:1.0;letter-spacing:-.01em;margin-bottom:1.5rem}
+.hero h1 em{font-style:italic;color:var(--gold)}.hero h1 .hr{color:var(--rose)}
+.hero-desc{font-size:.97rem;color:var(--gray);line-height:1.8;max-width:420px;margin-bottom:2.5rem}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+.btn-g{display:inline-flex;align-items:center;gap:8px;background:var(--gold);color:white;padding:14px 30px;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:100px;border:none;cursor:none;transition:all .25s;box-shadow:0 6px 24px rgba(184,150,90,.3)}
+.btn-g:hover{background:var(--brown);transform:translateY(-2px)}
+.btn-w{display:inline-flex;align-items:center;gap:8px;background:white;color:var(--brown);padding:14px 30px;font-size:.82rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;text-decoration:none;border-radius:100px;border:1.5px solid rgba(184,150,90,.25);cursor:none;transition:all .25s}
+.btn-w:hover{border-color:var(--gold);box-shadow:var(--shadow)}
+.hero-right{position:absolute;right:5%;top:50%;transform:translateY(-50%);display:flex;flex-direction:column;gap:1rem}
+.h-stat{background:white;border-radius:16px;padding:1.2rem 1.8rem;box-shadow:var(--shadow);border:1px solid rgba(184,150,90,.1);min-width:155px}
+.h-stat-n{font-family:'Cormorant Garamond',serif;font-size:2rem;font-weight:700;color:var(--gold);display:block;line-height:1}
+.h-stat-l{font-size:.68rem;font-weight:500;letter-spacing:.1em;text-transform:uppercase;color:var(--gray-light)}
+@keyframes fadeUp{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+/* STOCK */
+.spill{display:inline-flex;align-items:center;gap:5px;font-size:.62rem;font-weight:700;letter-spacing:.07em;text-transform:uppercase;padding:3px 9px;border-radius:100px}
+.s-in{background:rgba(34,197,94,.1);color:#16a34a;border:1px solid rgba(34,197,94,.2)}
+.s-out{background:rgba(239,68,68,.08);color:#dc2626;border:1px solid rgba(239,68,68,.15)}
+.sdot{width:5px;height:5px;border-radius:50%;flex-shrink:0}
+.s-in .sdot{background:#16a34a;animation:blink 1.8s ease infinite}
+.s-out .sdot{background:#dc2626}
+/* PROMO */
+.promo-section{padding:60px 5%}
+.promo-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:16px}
+.promo-card{border-radius:20px;padding:2rem;position:relative;overflow:hidden;cursor:none;transition:transform .3s}
+.promo-card:hover{transform:translateY(-4px)}
+.pc-dark{background:linear-gradient(135deg,#1A1208,#2D1F10);color:white}
+.pc-rose{background:linear-gradient(135deg,var(--rose-pale),#F5D5CC)}
+.pc-cream{background:linear-gradient(135deg,var(--gold-pale),#EEE0C4)}
+.p-label{font-size:.65rem;font-weight:700;letter-spacing:.18em;text-transform:uppercase;margin-bottom:.8rem;opacity:.7}
+.p-title{font-family:'Cormorant Garamond',serif;font-size:1.5rem;font-weight:700;margin-bottom:.5rem;line-height:1.2}
+.p-sub{font-size:.82rem;opacity:.65;line-height:1.5}
+.p-badge{position:absolute;top:1.2rem;right:1.2rem;background:var(--gold);color:white;font-size:.65rem;font-weight:700;letter-spacing:.1em;padding:5px 12px;border-radius:100px}
+.pc-dark .p-badge{background:var(--rose)}
+/* MARQUEE */
+.mq-wrap{padding:16px 0;background:var(--black);overflow:hidden}
+.mq-track{display:flex;animation:mscroll 24s linear infinite;white-space:nowrap}
+.mq-item{display:flex;align-items:center;gap:1.5rem;padding:0 2.5rem;font-size:.72rem;font-weight:600;letter-spacing:.16em;text-transform:uppercase;color:var(--gold)}
+.mq-sep{width:3px;height:3px;background:var(--rose);border-radius:50%;opacity:.6}
+@keyframes mscroll{0%{transform:translateX(0)}100%{transform:translateX(-50%)}}
+/* CAT */
+.cat-section{padding:80px 5%}
+.sec-ey{font-size:.7rem;font-weight:600;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);margin-bottom:.6rem}
+.sec-ti{font-family:'Cormorant Garamond',serif;font-size:clamp(1.8rem,3.5vw,3rem);font-weight:700;line-height:1.1;margin-bottom:40px}
+.sec-ti em{font-style:italic;color:var(--gold)}
+.cat-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(145px,1fr));gap:10px}
+.cat-card{background:white;border-radius:14px;padding:1.3rem .9rem;text-align:center;border:1.5px solid transparent;cursor:none;transition:all .22s;color:var(--black);position:relative}
+.cat-card:hover,.cat-card.active{border-color:var(--gold);box-shadow:var(--shadow);transform:translateY(-3px)}
+.cat-card.active{background:var(--gold-pale)}
+.c-ico{width:42px;height:42px;margin:0 auto .7rem;display:flex;align-items:center;justify-content:center;color:var(--gold)}
+.c-ico svg{width:32px;height:32px;stroke:var(--gold)}
+.cat-card.active .c-ico svg{stroke:var(--brown)}
+.cat-card:hover .c-ico svg{stroke:var(--brown)}
+.c-name{font-size:.76rem;font-weight:600;letter-spacing:.04em}
+.c-sub-badge{position:absolute;top:7px;right:7px;background:var(--rose);color:white;font-size:.54rem;font-weight:700;padding:2px 6px;border-radius:100px}
+/* SUBCAT */
+.subcat-row{display:none;gap:8px;flex-wrap:wrap;margin-top:1.2rem}
+.subcat-row.visible{display:flex}
+.sub-pill{background:white;border:1.5px solid rgba(184,150,90,.2);color:var(--brown);font-size:.72rem;font-weight:500;padding:5px 15px;border-radius:100px;cursor:none;transition:all .2s;font-family:'Jost',sans-serif}
+.sub-pill:hover,.sub-pill.active{background:var(--gold);border-color:var(--gold);color:white}
+/* PRODUCTS */
+.prod-section{padding:60px 5% 100px}
+.prod-header{display:flex;justify-content:space-between;align-items:center;margin-bottom:36px;flex-wrap:wrap;gap:1rem}
+.sort-sel{background:white;border:1px solid rgba(184,150,90,.2);padding:8px 16px;font-size:.77rem;font-family:'Jost',sans-serif;color:var(--brown);border-radius:100px;outline:none;cursor:none}
+.prod-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(255px,1fr));gap:18px}
+/* CARD */
+.pc{background:white;border-radius:20px;overflow:hidden;border:1px solid rgba(184,150,90,.08);transition:all .3s;cursor:none;position:relative}
+.pc:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg);border-color:rgba(184,150,90,.2)}
+.pc-img{height:220px;background:var(--cream2);display:flex;align-items:center;justify-content:center;position:relative;overflow:hidden}
+.pc-emoji{font-size:3.8rem;transition:transform .3s}
+.pc:hover .pc-emoji{transform:scale(1.1)}
+.pc-img img{width:100%;height:100%;object-fit:cover;transition:transform .35s}
+.pc:hover .pc-img img{transform:scale(1.04)}
+.pc-img-placeholder{width:80px;height:80px;border-radius:16px;background:white;display:flex;align-items:center;justify-content:center;font-size:2.8rem;box-shadow:0 4px 20px rgba(26,18,8,.08);transition:transform .3s}
+.pc:hover .pc-img-placeholder{transform:scale(1.08)}
+.pc-badges{position:absolute;top:10px;left:10px;display:flex;flex-direction:column;gap:5px}
+.badge-lbl{font-size:.58rem;font-weight:700;letter-spacing:.1em;text-transform:uppercase;padding:3px 9px;border-radius:100px;background:var(--gold);color:white}
+.pc-quick{position:absolute;bottom:10px;right:10px;background:white;border:1px solid rgba(184,150,90,.2);border-radius:100px;padding:6px 13px;font-size:.67rem;font-weight:600;color:var(--gold);opacity:0;transform:translateY(6px);transition:all .25s;cursor:none}
+.pc:hover .pc-quick{opacity:1;transform:translateY(0)}
+.pc-body{padding:1.2rem}
+.pc-top{display:flex;justify-content:space-between;align-items:center;margin-bottom:.35rem}
+.pc-cat{font-size:.6rem;font-weight:600;letter-spacing:.14em;text-transform:uppercase;color:var(--rose)}
+.pc-name{font-family:'Cormorant Garamond',serif;font-size:1.12rem;font-weight:700;margin-bottom:.35rem;line-height:1.2}
+.pc-desc{font-size:.75rem;color:var(--gray);line-height:1.6;margin-bottom:1rem;display:-webkit-box;-webkit-line-clamp:2;-webkit-box-orient:vertical;overflow:hidden}
+.pc-foot{display:flex;justify-content:space-between;align-items:center}
+.pc-price{font-family:'Cormorant Garamond',serif;font-size:1.28rem;font-weight:700;color:var(--gold)}
+.pc-price small{font-size:.63rem;font-family:'Jost',sans-serif;color:var(--gray-light);font-weight:400}
+.pc-price.rp{color:var(--gray-light)}
+.pc-btn{background:var(--gold);color:white;border:none;padding:8px 17px;font-size:.7rem;font-weight:600;letter-spacing:.08em;border-radius:100px;cursor:none;font-family:'Jost',sans-serif;transition:all .2s}
+.pc-btn:hover{background:var(--brown)}
+.pc-btn.dis{background:#E0E0E0;color:#AAA;cursor:not-allowed}
+.pc.rupt{opacity:.82}.pc.rupt .pc-img{filter:grayscale(.3)}
+/* MODAL */
+.mo{position:fixed;inset:0;background:rgba(26,18,8,.6);z-index:500;display:flex;align-items:center;justify-content:center;padding:20px;opacity:0;pointer-events:none;transition:opacity .3s;backdrop-filter:blur(6px)}
+.mo.open{opacity:1;pointer-events:all}
+.mo-box{background:white;border-radius:28px;max-width:680px;width:100%;max-height:90vh;overflow-y:auto;position:relative;transform:translateY(20px);transition:transform .3s}
+.mo.open .mo-box{transform:translateY(0)}
+.mo-img{height:260px;background:var(--cream2);display:flex;align-items:center;justify-content:center;border-radius:28px 28px 0 0;font-size:6rem;position:relative;overflow:hidden}
+.mo-img img{width:100%;height:100%;object-fit:cover}
+.mo-img-ph{font-size:6rem}
+.mo-stock{position:absolute;bottom:12px;left:14px}
+.mo-body{padding:2rem}
+.mo-cat{font-size:.64rem;font-weight:700;letter-spacing:.16em;text-transform:uppercase;color:var(--rose);margin-bottom:.4rem}
+.mo-name{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;margin-bottom:1rem;line-height:1.1}
+.mo-tabs{display:flex;gap:.4rem;margin-bottom:1.4rem;border-bottom:1px solid var(--cream2)}
+.mo-tab{background:none;border:none;padding:9px 15px;font-size:.76rem;font-weight:600;font-family:'Jost',sans-serif;color:var(--gray);cursor:none;border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .2s}
+.mo-tab.active{color:var(--gold);border-bottom-color:var(--gold)}
+.mo-tc{display:none;font-size:.86rem;color:var(--brown);line-height:1.8}
+.mo-tc.active{display:block}
+.mo-foot{display:flex;justify-content:space-between;align-items:center;margin-top:1.4rem;padding-top:1.4rem;border-top:1px solid var(--cream2);flex-wrap:wrap;gap:1rem}
+.mo-price{font-family:'Cormorant Garamond',serif;font-size:1.9rem;font-weight:700;color:var(--gold)}
+.mo-btns{display:flex;gap:.5rem;flex-wrap:wrap}
+.mo-btn{display:inline-flex;align-items:center;gap:6px;padding:9px 17px;border-radius:100px;font-size:.73rem;font-weight:600;font-family:'Jost',sans-serif;cursor:none;text-decoration:none;border:none;transition:all .2s}
+.mo-btn.wa{background:#25D366;color:white}.mo-btn.ig{background:linear-gradient(135deg,#833AB4,#FD1D1D,#F77737);color:white}
+.mo-btn.fb{background:#1877F2;color:white}.mo-btn.tk{background:#010101;color:white}
+.mo-btn:hover{transform:translateY(-2px);box-shadow:0 6px 20px rgba(0,0,0,.15)}
+.mo-close{position:absolute;top:14px;right:14px;background:white;border:none;width:34px;height:34px;border-radius:50%;font-size:.95rem;cursor:none;display:flex;align-items:center;justify-content:center;box-shadow:0 2px 10px rgba(0,0,0,.1);z-index:10}
+.mo-rupt{background:var(--cream2);border-radius:12px;padding:1rem;text-align:center;color:var(--gray);font-size:.84rem;width:100%}
+/* COUNTRIES */
+.ctry-section{padding:80px 5%;background:var(--black);color:white}
+.ctry-section .sec-ey{color:var(--gold)}
+.ctry-section .sec-ti{color:white}
+.ctry-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(180px,1fr));gap:10px;margin-top:2rem}
+.ctry-card{background:rgba(255,255,255,.04);border:1px solid rgba(184,150,90,.1);border-radius:13px;padding:.9rem 1.1rem;display:flex;align-items:center;gap:.7rem;font-size:.8rem;font-weight:500;color:rgba(255,255,255,.6);transition:all .2s}
+.ctry-card:hover{border-color:var(--gold);color:var(--gold);background:rgba(184,150,90,.06)}
+.ctry-flag{font-size:1.4rem}
+/* ABOUT */
+.about-section{padding:100px 5%;display:grid;grid-template-columns:1fr 1fr;gap:8rem;align-items:center}
+.about-img{background:var(--cream2);border-radius:28px;height:420px;display:flex;align-items:center;justify-content:center;font-size:8rem;position:relative;overflow:hidden}
+.about-img::before{content:'';position:absolute;inset:0;background:radial-gradient(circle at 70% 30%,rgba(184,150,90,.15),transparent 60%)}
+.about-body{color:var(--gray);line-height:1.85;margin-bottom:2rem;font-size:.92rem}
+.about-list{display:flex;flex-direction:column;gap:.8rem}
+.a-item{display:flex;align-items:flex-start;gap:.8rem;padding:1rem;background:var(--cream2);border-radius:12px}
+.a-icon{width:32px;height:32px;background:var(--gold-pale);border-radius:8px;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.a-text strong{display:block;font-size:.84rem;font-weight:600;margin-bottom:2px}
+.a-text p{font-size:.74rem;color:var(--gray)}
+/* PARTNERSHIP */
+.partner-section{padding:90px 5%;background:var(--black)}
+.partner-inner{display:grid;grid-template-columns:1fr 1fr;gap:6rem;align-items:center}
+.partner-desc{font-size:.92rem;color:rgba(255,255,255,.5);line-height:1.85;margin-bottom:2rem;max-width:400px}
+.partner-section .sec-ey{color:var(--gold)}
+.partner-section .sec-ti{color:white}
+.btn-partner{display:inline-flex;align-items:center;gap:.6rem;background:var(--gold);color:var(--black);padding:13px 26px;border-radius:100px;font-size:.82rem;font-weight:600;letter-spacing:.06em;text-decoration:none;transition:all .25s;cursor:none}
+.btn-partner:hover{background:white;transform:translateY(-2px)}
+.btn-partner-msg{background:var(--gold)}
+.btn-partner-msg:hover{background:white;color:var(--black)}
+.btn-partner i{font-size:1rem}
+.partner-btns{display:flex;flex-direction:row;gap:.8rem;flex-wrap:wrap;align-items:center}
+.partner-right{display:flex;flex-direction:column;gap:16px}
+.partner-card{background:rgba(255,255,255,.04);border:1px solid rgba(184,150,90,.15);border-radius:18px;padding:1.6rem;display:flex;align-items:flex-start;gap:1rem;transition:all .25s}
+.partner-card:hover{background:rgba(184,150,90,.07);border-color:rgba(184,150,90,.3);transform:translateX(4px)}
+.partner-icon{width:44px;height:44px;background:rgba(184,150,90,.1);border-radius:12px;display:flex;align-items:center;justify-content:center;flex-shrink:0}
+.partner-icon svg{width:22px;height:22px;stroke:var(--gold)}
+.partner-card-title{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;color:white;margin-bottom:.35rem}
+.partner-card-desc{font-size:.78rem;color:rgba(255,255,255,.4);line-height:1.65}
+@media(max-width:900px){.partner-inner{grid-template-columns:1fr;gap:3rem}}
+.partner-checks{display:flex;flex-direction:column;gap:.7rem;margin-bottom:1.5rem}
+.partner-check{display:flex;align-items:center;gap:.7rem;font-size:.86rem;color:rgba(255,255,255,.7)}
+.pcheck-icon{color:var(--gold);font-size:.9rem;flex-shrink:0}
+.partner-cta-text{font-size:.85rem;color:rgba(255,255,255,.45);margin-bottom:1.2rem;font-style:italic}
+.partner-urgency{display:inline-flex;align-items:center;gap:.5rem;background:rgba(196,150,90,.12);border:1px solid rgba(196,150,90,.25);color:var(--gold);font-size:.78rem;font-weight:600;padding:8px 16px;border-radius:100px;margin-bottom:1.8rem;letter-spacing:.04em}
+/* AVIS */
+.avis-section{padding:90px 5%;background:var(--cream2)}
+.avis-inner{max-width:700px;margin:0 auto}
+.avis-header{text-align:center;margin-bottom:3rem}
+.avis-sub{color:var(--gray);font-size:.9rem;margin-top:.8rem}
+.avis-form-wrap{background:white;border-radius:var(--radius-lg);padding:2.5rem;box-shadow:var(--shadow)}
+.form-row{display:grid;grid-template-columns:1fr 1fr;gap:1rem}
+.form-group{margin-bottom:1.4rem}
+.form-label{display:block;font-size:.75rem;font-weight:600;letter-spacing:.08em;text-transform:uppercase;color:var(--brown2);margin-bottom:.5rem}
+.form-required{color:var(--rose)}
+.form-input{width:100%;padding:11px 16px;border:1.5px solid rgba(184,150,90,.2);border-radius:10px;font-size:.86rem;font-family:'Jost',sans-serif;color:var(--black);background:var(--marble);outline:none;transition:border-color .2s}
+.form-input:focus{border-color:var(--gold);background:white}
+.form-input::placeholder{color:var(--gray2)}
+.form-select{appearance:none;background-image:url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 24 24' fill='none' stroke='%238A7A6A' stroke-width='2'%3E%3Cpath d='M6 9l6 6 6-6'/%3E%3C/svg%3E");background-repeat:no-repeat;background-position:right 14px center;cursor:none}
+.form-textarea{height:110px;resize:vertical}
+.star-rating{display:flex;gap:.3rem;margin-bottom:.3rem}
+.star{font-size:1.8rem;color:var(--gray2);cursor:none;transition:color .15s}
+.star.active,.star.hover{color:var(--gold)}
+.form-msg{padding:.9rem 1.2rem;border-radius:10px;font-size:.84rem;margin-bottom:1.2rem}
+.form-msg.success{background:rgba(34,197,94,.08);color:#15803d;border:1px solid rgba(34,197,94,.2)}
+.form-msg.error{background:rgba(239,68,68,.08);color:#dc2626;border:1px solid rgba(239,68,68,.2)}
+.form-submit{width:100%;background:var(--gold);color:white;border:none;padding:14px;border-radius:100px;font-size:.85rem;font-weight:600;font-family:'Jost',sans-serif;letter-spacing:.08em;cursor:none;transition:all .25s;display:flex;align-items:center;justify-content:center;gap:.6rem}
+.form-submit:hover{background:var(--brown2)}
+.form-submit:disabled{background:var(--gray2);cursor:not-allowed}
+@media(max-width:600px){.form-row{grid-template-columns:1fr}}
+/* ORDER */
+.order-section{padding:80px 5%;text-align:center;background:linear-gradient(135deg,var(--cream),var(--cream2))}
+.soc-cards{display:flex;gap:12px;justify-content:center;max-width:900px;margin:2.5rem auto 0;flex-wrap:wrap}
+.soc-card{flex:1;min-width:155px;background:white;border-radius:20px;padding:2rem 1.2rem;text-decoration:none;color:var(--black);border:1px solid rgba(184,150,90,.1);transition:all .3s;cursor:none;display:flex;flex-direction:column;align-items:center;text-align:center}
+.soc-card:hover{transform:translateY(-6px);box-shadow:var(--shadow-lg)}
+.soc-card.wa:hover{background:#25D366;color:white}.soc-card.ig:hover{background:linear-gradient(135deg,#833AB4,#FD1D1D);color:white}
+.soc-card.fb:hover{background:#1877F2;color:white}.soc-card.tk:hover{background:#010101;color:white}
+.soc-card:hover .soc-lbl{color:rgba(255,255,255,.7)}
+.soc-ico{display:flex;align-items:center;justify-content:center;width:56px;height:56px;border-radius:16px;background:var(--cream2);margin:0 auto 1rem;font-size:1.6rem;transition:all .3s}
+.soc-ico i{font-size:1.6rem;line-height:1}
+.soc-card:hover .soc-ico{background:rgba(255,255,255,.2)}
+.soc-name{font-family:'Cormorant Garamond',serif;font-size:1.1rem;font-weight:700;margin-bottom:.2rem}
+.soc-lbl{font-size:.72rem;color:var(--gray)}
+/* FOOTER */
+footer{background:var(--black);color:white;padding:50px 5% 30px}
+.ft{display:grid;grid-template-columns:2fr 1fr 1fr;gap:4rem;margin-bottom:3rem}
+.fb-brand .nav-logo{color:white;display:block;margin-bottom:1rem}
+.fb-brand p{font-size:.8rem;color:rgba(255,255,255,.4);line-height:1.7;max-width:280px}
+.fc h4{font-size:.74rem;font-weight:700;letter-spacing:.14em;text-transform:uppercase;color:var(--gold);margin-bottom:1rem}
+.fc ul{list-style:none;display:flex;flex-direction:column;gap:.5rem}
+.fc ul a{font-size:.78rem;color:rgba(255,255,255,.4);text-decoration:none;transition:color .2s;cursor:none;display:flex;align-items:center;gap:.5rem}
+.fc ul a:hover{color:var(--gold)}
+.fc ul a .fab{font-size:.9rem;width:16px;text-align:center}
+.fb{border-top:1px solid rgba(255,255,255,.06);padding-top:1.4rem;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:1rem}
+.fc-copy{font-size:.72rem;color:rgba(255,255,255,.3)}
+.fc-credit{font-size:.72rem;color:rgba(255,255,255,.25)}
+.fc-credit span{color:var(--gold)}
+.toast{position:fixed;bottom:2rem;left:50%;transform:translateX(-50%) translateY(20px);background:var(--black);color:white;padding:12px 24px;border-radius:100px;font-size:.8rem;z-index:1000;opacity:0;transition:all .3s;pointer-events:none}
+.toast.show{opacity:1;transform:translateX(-50%) translateY(0)}
+.reveal{opacity:0;transform:translateY(24px);transition:opacity .65s ease,transform .65s ease}
+.reveal.visible{opacity:1;transform:translateY(0)}
+@media(max-width:900px){.hero-right{display:none}.about-section{grid-template-columns:1fr;gap:2rem}.about-img{height:250px}.ft{grid-template-columns:1fr 1fr}}
+@media(max-width:768px){.nav-links{display:none}.prod-grid{grid-template-columns:1fr 1fr}.ctry-grid{grid-template-columns:repeat(2,1fr)}}
+@media(max-width:480px){.prod-grid{grid-template-columns:1fr}.cat-grid{grid-template-columns:repeat(3,1fr)}.ft{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<div class="cur" id="cur"></div><div class="cur-ring" id="curRing"></div>
+<div class="toast" id="toast"></div>
+
+<div class="lang-bar">
+  <button class="lang-btn active" onclick="setLang('fr')">FR</button>
+  <button class="lang-btn" onclick="setLang('ar')">عربي</button>
+  <button class="lang-btn" onclick="setLang('en')">EN</button>
+</div>
+
+<nav><div class="nav-inner">
+  <a href="#" class="nav-logo">Arvea <span>Velours</span> <em>Store</em></a>
+  <ul class="nav-links">
+    <li class="nav-item-drop">
+      <a href="#products" class="nav-drop-trigger">
+        <span data-fr="Produits" data-ar="المنتجات" data-en="Products">Produits</span> <span class="drop-arrow">▼</span>
+      </a>
+      <div class="nav-dropdown">
+        <div class="drop-sec" data-fr="Moustahdarates Naturelles" data-ar="مستحضرات تجميل طبيعية" data-en="Natural Cosmetics">Moustahdarates Naturelles</div>
+        <button class="drop-btn" onclick="navF('basics')">🧴 <span data-fr="Essentiels" data-ar="الأساسيات" data-en="Essentials">Essentiels</span></button>
+        <button class="drop-btn" onclick="navF('nettoyage')">🫧 <span data-fr="Nettoyage" data-ar="منتجات النظافة" data-en="Cleansing">Nettoyage</span></button>
+        <button class="drop-btn" onclick="navF('soins')">✨ <span data-fr="Soins visage" data-ar="منتجات العناية" data-en="Face care">Soins visage</span></button>
+        <button class="drop-btn" onclick="navF('homme-soins')">🧔 <span data-fr="Soins homme" data-ar="منتجات العناية للرجال" data-en="Men's care">Soins homme</span></button>
+        <button class="drop-btn" onclick="navF('cheveux')">💆 <span data-fr="Cheveux" data-ar="منتجات العناية بالشعر" data-en="Hair">Cheveux</span></button>
+        <div class="drop-sep"></div>
+        <div class="drop-sec" data-fr="Maquillage" data-ar="المكياج" data-en="Makeup">Maquillage</div>
+        <button class="drop-btn" onclick="navF('maq-visage')">💄 <span data-fr="Visage" data-ar="وجه" data-en="Face">Visage</span></button>
+        <button class="drop-btn" onclick="navF('maq-levres')">💋 <span data-fr="Lèvres" data-ar="شفاه" data-en="Lips">Lèvres</span></button>
+        <div class="drop-sep"></div>
+        <div class="drop-sec" data-fr="Parfums" data-ar="العطور" data-en="Perfumes">Parfums</div>
+        <button class="drop-btn" onclick="navF('parf-femme')">🌸 <span data-fr="Femme" data-ar="نساء" data-en="Women">Femme</span></button>
+        <button class="drop-btn" onclick="navF('parf-homme')">🖤 <span data-fr="Homme" data-ar="رجال" data-en="Men">Homme</span></button>
+        <div class="drop-sep"></div>
+        <button class="drop-btn" onclick="navF('complement')">💊 <span data-fr="Compléments alimentaires" data-ar="المكملات الغذائية" data-en="Supplements">Compléments alimentaires</span></button>
+        <button class="drop-btn" onclick="navF('olymeal')">🌿 Olymeal</button>
+        <button class="drop-btn" onclick="navF('parf-poche')">👜 <span data-fr="Parfums poche & accessoires" data-ar="عطور الجيب وإكسسوارات" data-en="Pocket perfumes">Parfums poche</span></button>
+      </div>
+    </li>
+    <li><a href="#promo" data-fr="Promotions" data-ar="العروض" data-en="Promotions">Promotions</a></li>
+    <li><a href="#about" data-fr="À propos" data-ar="من نحن" data-en="About">À propos</a></li>
+    <li><a href="#order" class="nav-cta" data-fr="Commander" data-ar="اطلب الآن" data-en="Order">Commander</a></li>
+  </ul>
+  <div class="nav-search">
+    <svg width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="#8A7A6A" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInput" placeholder="Rechercher..." oninput="doFilter()"
+      data-fr-placeholder="Rechercher..." data-ar-placeholder="بحث..." data-en-placeholder="Search...">
+  </div>
+</div></nav>
+
+<section class="hero">
+  <div class="hero-pattern"></div><div class="hero-blob"></div><div class="hero-blob2"></div>
+  <div class="hero-content">
+    <div class="hero-badge"><span class="bdot"></span><span data-fr="Produits 100% authentiques" data-ar="منتجات أصلية 100%" data-en="100% authentic products">Produits 100% authentiques</span></div>
+    <h1>
+      <span data-fr="Votre beauté," data-ar="جمالك" data-en="Your beauty,">Votre beauté,</span><br>
+      <em data-fr="sublimée" data-ar="يستحق" data-en="elevated">sublimée</em><br>
+      <span class="hr" data-fr="par ARVEA." data-ar="الأفضل." data-en="by ARVEA.">par ARVEA.</span>
+    </h1>
+    <p class="hero-desc" data-fr="Cosmétiques ARVEA Nature 100% originaux — soins, maquillage, parfums, cheveux et plus. Livraison rapide partout en Algérie." data-ar="مستحضرات ARVEA Nature أصلية 100% — عناية، مكياج، عطور وأكثر. توصيل سريع في الجزائر." data-en="100% original ARVEA Nature cosmetics — care, makeup, perfumes, hair and more. Fast delivery across Algeria.">Cosmétiques ARVEA Nature 100% originaux — soins, maquillage, parfums et plus.</p>
+    <div class="hero-btns">
+      <a href="#products" class="btn-g" data-fr="Voir les produits →" data-ar="عرض المنتجات →" data-en="Browse products →">Voir les produits →</a>
+      <a href="#order" class="btn-w" data-fr="Commander" data-ar="اطلب الآن" data-en="Order now">Commander</a>
+    </div>
+  </div>
+  <div class="hero-right">
+    <div class="h-stat"><span class="h-stat-n">9+</span><span class="h-stat-l" data-fr="Produits" data-ar="منتج" data-en="Products">Produits</span></div>
+    <div class="h-stat"><span class="h-stat-n">10</span><span class="h-stat-l" data-fr="Pays" data-ar="دول" data-en="Countries">Pays</span></div>
+    <div class="h-stat"><span class="h-stat-n">100%</span><span class="h-stat-l" data-fr="Original" data-ar="أصلي" data-en="Original">Original</span></div>
+  </div>
+</section>
+
+<section class="promo-section reveal" id="promo">
+  <div class="sec-ey" data-fr="Offres spéciales" data-ar="عروض خاصة" data-en="Special offers">Offres spéciales</div>
+  <h2 class="sec-ti" data-fr="Promotions <em>du moment</em>" data-ar="عروض <em>اليوم</em>" data-en="Current <em>deals</em>">Promotions <em>du moment</em></h2>
+  <div class="promo-grid">
+    <div class="promo-card pc-dark"><div class="p-label" data-fr="Offre limitée" data-ar="عرض محدود" data-en="Limited offer">Offre limitée</div><div class="p-title" data-fr="Bundle Soin Visage" data-ar="مجموعة العناية" data-en="Face Care Bundle">Bundle Soin Visage</div><div class="p-sub" data-fr="Anti Spot + Miracle Cream" data-ar="Anti Spot + Miracle Cream معاً" data-en="Anti Spot + Miracle Cream">Anti Spot + Miracle Cream</div><div class="p-badge">-15%</div></div>
+    <div class="promo-card pc-rose"><div class="p-label" data-fr="Nouveauté" data-ar="جديد" data-en="New">Nouveauté</div><div class="p-title" data-fr="Parfums Exclusifs" data-ar="عطور حصرية" data-en="Exclusive Perfumes">Parfums Exclusifs</div><div class="p-sub" data-fr="Girl & Insolite disponibles" data-ar="Girl & Insolite متاحان" data-en="Girl & Insolite available">Girl & Insolite disponibles</div><div class="p-badge">NEW</div></div>
+    <div class="promo-card pc-cream"><div class="p-label" data-fr="Livraison offerte" data-ar="توصيل مجاني" data-en="Free delivery">Livraison offerte</div><div class="p-title" data-fr="Dès 2 produits" data-ar="عند شراء منتجين" data-en="From 2 products">Dès 2 produits</div><div class="p-sub" data-fr="Valable sur toute l'Algérie" data-ar="ساري في الجزائر" data-en="Valid across Algeria">Valable sur toute l'Algérie</div></div>
+  </div>
+</section>
+
+<div class="mq-wrap"><div class="mq-track">
+  <div class="mq-item">Essentiels<div class="mq-sep"></div></div><div class="mq-item">Nettoyage<div class="mq-sep"></div></div>
+  <div class="mq-item">Soins visage<div class="mq-sep"></div></div><div class="mq-item">Maquillage Visage<div class="mq-sep"></div></div>
+  <div class="mq-item">Lèvres<div class="mq-sep"></div></div><div class="mq-item">Parfums Femme 🌸<div class="mq-sep"></div></div>
+  <div class="mq-item">Parfums Homme 🖤<div class="mq-sep"></div></div><div class="mq-item">Soins Homme<div class="mq-sep"></div></div>
+  <div class="mq-item">Cheveux<div class="mq-sep"></div></div><div class="mq-item">Compléments<div class="mq-sep"></div></div>
+  <div class="mq-item">Olymeal<div class="mq-sep"></div></div><div class="mq-item">Parfums poche<div class="mq-sep"></div></div>
+  <div class="mq-item">Livraison 48h 🇩🇿<div class="mq-sep"></div></div>
+  <div class="mq-item">Essentiels<div class="mq-sep"></div></div><div class="mq-item">Nettoyage<div class="mq-sep"></div></div>
+  <div class="mq-item">Soins visage<div class="mq-sep"></div></div><div class="mq-item">Maquillage Visage<div class="mq-sep"></div></div>
+  <div class="mq-item">Lèvres<div class="mq-sep"></div></div><div class="mq-item">Parfums Femme 🌸<div class="mq-sep"></div></div>
+  <div class="mq-item">Parfums Homme 🖤<div class="mq-sep"></div></div><div class="mq-item">Soins Homme<div class="mq-sep"></div></div>
+  <div class="mq-item">Cheveux<div class="mq-sep"></div></div><div class="mq-item">Compléments<div class="mq-sep"></div></div>
+  <div class="mq-item">Olymeal<div class="mq-sep"></div></div><div class="mq-item">Parfums poche<div class="mq-sep"></div></div>
+  <div class="mq-item">Livraison 48h 🇩🇿<div class="mq-sep"></div></div>
+</div></div>
+
+<section class="cat-section reveal" id="categories">
+  <div class="sec-ey" data-fr="Catégories" data-ar="الفئات" data-en="Categories">Catégories</div>
+  <h2 class="sec-ti" data-fr="Toutes les <em>gammes</em>" data-ar="جميع <em>الفئات</em>" data-en="All <em>ranges</em>">Toutes les <em>gammes</em></h2>
+  <div class="cat-grid">
+    <div class="cat-card active" onclick="filterCat('all')" data-cat="all">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="3" width="7" height="7" rx="1"/><rect x="14" y="3" width="7" height="7" rx="1"/><rect x="3" y="14" width="7" height="7" rx="1"/><rect x="14" y="14" width="7" height="7" rx="1"/></svg></span>
+      <div class="c-name" data-fr="Tout" data-ar="الكل" data-en="All">Tout</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('basics')" data-cat="basics">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3h8a1 1 0 011 1v1H7V4a1 1 0 011-1z"/><rect x="5" y="5" width="14" height="16" rx="2"/><path d="M9 12h6M12 9v6"/></svg></span>
+      <div class="c-name" data-fr="Essentiels" data-ar="الأساسيات" data-en="Essentials">Essentiels</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('maquillage')" data-cat="maquillage">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 3l-1 4H8L7 3"/><path d="M6 7l2 14h8l2-14"/><path d="M10 11l1 3h2l1-3"/><path d="M9 7h6"/></svg></span>
+      <div class="c-name" data-fr="Maquillage" data-ar="المكياج" data-en="Makeup">Maquillage</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('parfum')" data-cat="parfum">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="8" width="12" height="13" rx="2"/><path d="M10 8V6a2 2 0 114 0v2"/><path d="M10 5h4"/><circle cx="12" cy="14" r="2"/><path d="M12 12v-1M12 16v1M10 14H9M15 14h-1"/></svg></span>
+      <div class="c-name" data-fr="Parfums" data-ar="العطور" data-en="Perfumes">Parfums</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('complement')" data-cat="complement">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="7" y="3" width="10" height="4" rx="1"/><rect x="5" y="7" width="14" height="14" rx="2"/><path d="M12 11v6M9 14h6"/></svg></span>
+      <div class="c-name" data-fr="Compléments" data-ar="مكملات" data-en="Supplements">Compléments</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('olymeal')" data-cat="olymeal">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2C8 6 6 9 6 13a6 6 0 0012 0c0-4-2-7-6-11z"/><path d="M12 2v20M8 8c1.5 1 3 1.5 4 4"/></svg></span>
+      <div class="c-name">Olymeal</div>
+    </div>
+    <div class="cat-card" onclick="filterCat('parf-poche')" data-cat="parf-poche">
+      <span class="c-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M6 7V5a2 2 0 012-2h8a2 2 0 012 2v2"/><rect x="3" y="7" width="18" height="14" rx="2"/><path d="M9 12a3 3 0 006 0"/></svg></span>
+      <div class="c-name" data-fr="Parfums poche" data-ar="عطور الجيب" data-en="Pocket perfumes">Parfums poche</div>
+    </div>
+  </div>
+  <!-- SUBCATS -->
+  <div class="subcat-row" id="sub-basics">
+    <button class="sub-pill active" onclick="subFilter('basics','all')" data-sub="all">Tout</button>
+    <button class="sub-pill" onclick="subFilter('basics','nettoyage')" data-sub="nettoyage"><span data-fr="Nettoyage" data-ar="النظافة" data-en="Cleansing">Nettoyage</span></button>
+    <button class="sub-pill" onclick="subFilter('basics','soins')" data-sub="soins"><span data-fr="Soins" data-ar="العناية" data-en="Care">Soins</span></button>
+    <button class="sub-pill" onclick="subFilter('basics','homme-soins')" data-sub="homme-soins"><span data-fr="Homme" data-ar="رجالي" data-en="Men">Homme</span></button>
+    <button class="sub-pill" onclick="subFilter('basics','cheveux')" data-sub="cheveux"><span data-fr="Cheveux" data-ar="الشعر" data-en="Hair">Cheveux</span></button>
+  </div>
+  <div class="subcat-row" id="sub-maquillage">
+    <button class="sub-pill active" onclick="subFilter('maquillage','all')" data-sub="all">Tout</button>
+    <button class="sub-pill" onclick="subFilter('maquillage','maq-visage')" data-sub="maq-visage"><span data-fr="Visage" data-ar="وجه" data-en="Face">Visage</span></button>
+    <button class="sub-pill" onclick="subFilter('maquillage','maq-levres')" data-sub="maq-levres"><span data-fr="Lèvres" data-ar="شفاه" data-en="Lips">Lèvres</span></button>
+  </div>
+  <div class="subcat-row" id="sub-parfum">
+    <button class="sub-pill active" onclick="subFilter('parfum','all')" data-sub="all">Tout</button>
+    <button class="sub-pill" onclick="subFilter('parfum','parf-femme')" data-sub="parf-femme"><span data-fr="Femme" data-ar="نساء" data-en="Women">Femme</span></button>
+    <button class="sub-pill" onclick="subFilter('parfum','parf-homme')" data-sub="parf-homme"><span data-fr="Homme" data-ar="رجال" data-en="Men">Homme</span></button>
+  </div>
+</section>
+
+<section class="prod-section" id="products">
+  <div class="prod-header reveal">
+    <div>
+      <div class="sec-ey" data-fr="Notre collection" data-ar="مجموعتنا" data-en="Our collection">Notre collection</div>
+      <h2 class="sec-ti" data-fr="Produits <em>authentiques</em>" data-ar="منتجات <em>أصلية</em>" data-en="<em>Authentic</em> products">Produits <em>authentiques</em></h2>
+    </div>
+    <select class="sort-sel" onchange="sortP(this.value)">
+      <option value="default" data-fr="Trier par" data-ar="ترتيب" data-en="Sort by">Trier par</option>
+      <option value="stock" data-fr="En stock d'abord" data-ar="المتوفر أولاً" data-en="In stock first">En stock d'abord</option>
+      <option value="price-asc" data-fr="Prix croissant" data-ar="السعر: الأقل" data-en="Price: low to high">Prix croissant</option>
+      <option value="price-desc" data-fr="Prix décroissant" data-ar="السعر: الأعلى" data-en="Price: high to low">Prix décroissant</option>
+      <option value="name" data-fr="Nom A-Z" data-ar="الاسم" data-en="Name A-Z">Nom A-Z</option>
+    </select>
+  </div>
+  <div class="prod-grid" id="prodGrid"></div>
+</section>
+
+<section class="ctry-section reveal" id="countries">
+  <div class="sec-ey" data-fr="Disponibilité internationale" data-ar="التوافر الدولي" data-en="International availability">Disponibilité internationale</div>
+  <h2 class="sec-ti" data-fr="ARVEA présent dans <em>10 pays</em>" data-ar="ARVEA في <em>10 دول</em>" data-en="ARVEA in <em>10 countries</em>">ARVEA présent dans <em>10 pays</em></h2>
+  <div class="ctry-grid" id="ctryGrid"></div>
+</section>
+
+<section class="about-section reveal" id="about">
+  <div class="about-img">🌿</div>
+  <div>
+    <div class="sec-ey" data-fr="À propos" data-ar="من نحن" data-en="About us">À propos</div>
+    <h2 class="sec-ti" style="margin-bottom:1.2rem" data-fr="Pourquoi nous <em>choisir ?</em>" data-ar="لماذا <em>تختارنا؟</em>" data-en="Why <em>choose us?</em>">Pourquoi nous <em>choisir ?</em></h2>
+    <p class="about-body" data-fr="Arvea Velours Store est une revendeuse officielle des produits ARVEA Nature en Algérie. Tous nos produits sont commandés directement via le réseau officiel ARVEA, garantissant authenticité et qualité à chaque commande." data-ar="Arvea Velours Store هي موزعة رسمية لمنتجات ARVEA Nature في الجزائر. جميع منتجاتنا مطلوبة مباشرة عبر الشبكة الرسمية." data-en="Arvea Velours Store is an official ARVEA Nature reseller in Algeria. All products ordered directly via the official network.">Arvea Velours Store est une revendeuse officielle des produits ARVEA Nature en Algérie.</p>
+    <div class="about-list">
+      <div class="a-item"><div class="a-icon">✓</div><div class="a-text"><strong data-fr="100% Authentique" data-ar="أصلي 100%" data-en="100% Authentic">100% Authentique</strong><p data-fr="Commandés via compte ARVEA officiel" data-ar="مطلوبة عبر الحساب الرسمي" data-en="Via official ARVEA account">Commandés via compte ARVEA officiel</p></div></div>
+      <div class="a-item"><div class="a-icon">🚀</div><div class="a-text"><strong data-fr="Livraison rapide" data-ar="توصيل سريع" data-en="Fast delivery">Livraison rapide</strong><p data-fr="24 à 48h partout en Algérie" data-ar="24 إلى 48 ساعة في الجزائر" data-en="24 to 48h across Algeria">24 à 48h partout en Algérie</p></div></div>
+      <div class="a-item"><div class="a-icon">💬</div><div class="a-text"><strong data-fr="Conseil personnalisé" data-ar="استشارة شخصية" data-en="Personalized advice">Conseil personnalisé</strong><p data-fr="Aide au choix selon votre type de peau" data-ar="مساعدة حسب نوع بشرتك" data-en="Help based on your skin type">Aide au choix selon votre type de peau</p></div></div>
+    </div>
+  </div>
+</section>
+
+<!-- PARTNERSHIP SECTION -->
+<section class="partner-section reveal" id="partnership">
+  <div class="partner-inner">
+    <div class="partner-left">
+      <div class="sec-ey" data-fr="Opportunité de travail" data-ar="فرصة عمل" data-en="Work opportunity">Opportunité de travail</div>
+      <h2 class="sec-ti" style="margin-bottom:1.2rem" data-fr="Vous cherchez <em>plus</em> ?" data-ar="تبحث عن <em>أكثر</em>؟" data-en="Looking for <em>more</em>?">Vous cherchez <em>plus</em> ?</h2>
+      <p class="partner-desc">Vous cherchez une opportunité de travail ou un revenu supplémentaire ?<br><br>Rejoignez notre équipe et découvrez une opportunité dans le domaine de la beauté et du bien-être avec les produits Arvea.</p>
+      <div class="partner-checks">
+        <div class="partner-check"><span class="pcheck-icon">✔</span><span>Travail flexible</span></div>
+        <div class="partner-check"><span class="pcheck-icon">✔</span><span>Possibilité de développer votre propre activité</span></div>
+        <div class="partner-check"><span class="pcheck-icon">✔</span><span>Accompagnement et formation</span></div>
+      </div>
+      <p class="partner-cta-text">📩 Si vous êtes intéressé(e), contactez-nous pour plus d'informations.</p>
+      <div class="partner-urgency">✨ Les places dans l'équipe sont limitées.</div>
+      <div class="partner-btns">
+        <a href="https://wa.me/213778671012?text=Bonjour%2C%20je%20suis%20int%C3%A9ress%C3%A9(e)%20par%20l'opportunit%C3%A9%20de%20travail%20avec%20Arvea" class="btn-partner" target="_blank">
+          <i class="fab fa-whatsapp"></i>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://m.me/ArvaeVeloursStore" class="btn-partner btn-partner-msg" target="_blank">
+          <i class="fab fa-facebook-messenger"></i>
+          <span>Messenger</span>
+        </a>
+      </div>
+    </div>
+    <div class="partner-right">
+      <div class="partner-card">
+        <div class="partner-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M17 21v-2a4 4 0 00-4-4H5a4 4 0 00-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M23 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+        </div>
+        <div><h3 class="partner-card-title">Rejoindre l'équipe</h3>
+        <p class="partner-card-desc">Intégrez un réseau dynamique dans le secteur de la beauté et construisez votre propre activité.</p></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20h9"/><path d="M16.5 3.5a2.121 2.121 0 013 3L7 19l-4 1 1-4L16.5 3.5z"/></svg>
+        </div>
+        <div><h3 class="partner-card-title">Formation & accompagnement</h3>
+        <p class="partner-card-desc">Vous serez guidé(e) à chaque étape pour démarrer et développer votre activité avec succès.</p></div>
+      </div>
+      <div class="partner-card">
+        <div class="partner-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/></svg>
+        </div>
+        <div><h3 class="partner-card-title">Flexibilité totale</h3>
+        <p class="partner-card-desc">Travaillez à votre rythme, selon vos disponibilités, depuis n'importe où en Algérie.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- AVIS SECTION -->
+<section class="order-section reveal" id="order">
+  <div class="sec-ey" data-fr="Commander" data-ar="اطلب الآن" data-en="Order">Commander</div>
+  <h2 class="sec-ti" data-fr="Contactez-nous <em>maintenant</em>" data-ar="تواصل <em>معنا الآن</em>" data-en="Contact <em>us now</em>">Contactez-nous <em>maintenant</em></h2>
+  <div class="soc-cards">
+    <a href="https://wa.me/213778671012" class="soc-card wa" target="_blank">
+      <span class="soc-ico"><i class="fab fa-whatsapp"></i></span>
+      <div class="soc-name">WhatsApp</div>
+      <div class="soc-lbl" data-fr="Réponse rapide" data-ar="رد سريع" data-en="Quick reply">Réponse rapide</div>
+    </a>
+    <a href="https://instagram.com/arvea.velours.store" class="soc-card ig" target="_blank">
+      <span class="soc-ico"><i class="fab fa-instagram"></i></span>
+      <div class="soc-name">Instagram</div>
+      <div class="soc-lbl">@arvea.velours.store</div>
+    </a>
+    <a href="https://facebook.com/ArvaeVeloursStore" class="soc-card fb" target="_blank">
+      <span class="soc-ico"><i class="fab fa-facebook-f"></i></span>
+      <div class="soc-name">Facebook</div>
+      <div class="soc-lbl">Arvea Velours Store</div>
+    </a>
+    <a href="https://tiktok.com/@arvea.velours.store" class="soc-card tk" target="_blank">
+      <span class="soc-ico"><i class="fab fa-tiktok"></i></span>
+      <div class="soc-name">TikTok</div>
+      <div class="soc-lbl">@arvea.velours.store</div>
+    </a>
+  </div>
+</section>
+
+<section class="avis-section reveal" id="avis">
+  <div class="avis-inner">
+    <div class="avis-header">
+      <div class="sec-ey">Votre avis</div>
+      <h2 class="sec-ti">Comment était votre <em>expérience</em> ?</h2>
+      <p class="avis-sub">Dites-nous ce que vous avez pensé de notre site et de nos services. Chaque retour compte.</p>
+    </div>
+    <div class="avis-form-wrap">
+      <form id="avisForm" action="https://formspree.io/f/mbdzzylz" method="POST">
+        <div class="form-row">
+          <div class="form-group">
+            <label class="form-label">Nom <span class="form-required">*</span></label>
+            <input type="text" name="nom" class="form-input" placeholder="Votre nom" required>
+          </div>
+          <div class="form-group">
+            <label class="form-label">Wilaya</label>
+            <input type="text" name="wilaya" class="form-input" placeholder="Votre wilaya">
+          </div>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Note globale du site <span class="form-required">*</span></label>
+          <div class="star-rating" id="starRating">
+            <span class="star" data-val="1">★</span>
+            <span class="star" data-val="2">★</span>
+            <span class="star" data-val="3">★</span>
+            <span class="star" data-val="4">★</span>
+            <span class="star" data-val="5">★</span>
+          </div>
+          <input type="hidden" name="note" id="noteInput" required>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Votre avis sur le site <span class="form-required">*</span></label>
+          <textarea name="avis" class="form-input form-textarea" placeholder="Facilité de navigation, design, clarté des informations..." required></textarea>
+        </div>
+        <div class="form-group">
+          <label class="form-label">Suggestions d'amélioration</label>
+          <textarea name="suggestion" class="form-input form-textarea" style="height:80px" placeholder="Qu'est-ce qu'on pourrait améliorer ?"></textarea>
+        </div>
+        <div id="formMsg" class="form-msg" style="display:none"></div>
+        <button type="submit" class="form-submit" id="formSubmit">
+          <span id="submitText">Envoyer mon avis</span>
+          <i class="fas fa-paper-plane" style="font-size:.85rem"></i>
+        </button>
+      </form>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="ft">
+    <div class="fb-brand"><a href="#" class="nav-logo">Arvea <span>Velours</span> <em>Store</em></a><p data-fr="Revendeuse officielle ARVEA Nature en Algérie. Produits 100% authentiques." data-ar="موزعة رسمية لـ ARVEA Nature في الجزائر. منتجات أصلية 100%." data-en="Official ARVEA Nature reseller in Algeria. 100% authentic products.">Revendeuse officielle ARVEA Nature en Algérie.</p></div>
+    <div class="fc"><h4 data-fr="Navigation" data-ar="التنقل" data-en="Navigation">Navigation</h4><ul>
+      <li><a href="#products" data-fr="Produits" data-ar="المنتجات" data-en="Products">Produits</a></li>
+      <li><a href="#promo" data-fr="Promotions" data-ar="العروض" data-en="Promotions">Promotions</a></li>
+      <li><a href="#countries" data-fr="Pays" data-ar="الدول" data-en="Countries">Pays</a></li>
+      <li><a href="#partnership" data-fr="Collaboration" data-ar="تعاون" data-en="Collaboration">Collaboration</a></li>
+      <li><a href="#avis" data-fr="Avis" data-ar="آراء" data-en="Reviews">Avis</a></li>
+      <li><a href="#about" data-fr="À propos" data-ar="من نحن" data-en="About">À propos</a></li>
+    </ul></div>
+    <div class="fc"><h4 data-fr="Contact" data-ar="اتصل بنا" data-en="Contact">Contact</h4><ul>
+      <li><a href="https://wa.me/213778671012"><i class="fab fa-whatsapp"></i> WhatsApp</a></li>
+      <li><a href="https://instagram.com/arvea.velours.store"><i class="fab fa-instagram"></i> Instagram</a></li>
+      <li><a href="https://facebook.com/ArvaeVeloursStore"><i class="fab fa-facebook-f"></i> Facebook</a></li>
+      <li><a href="https://tiktok.com/@arvea.velours.store"><i class="fab fa-tiktok"></i> TikTok</a></li>
+    </ul></div>
+  </div>
+  <div class="fb">
+    <div class="fc-copy">© 2026 Arvea Velours Store — <span data-fr="Algérie" data-ar="الجزائر" data-en="Algeria">Algérie</span></div>
+    <div class="fc-credit" data-fr="Conçu & développé par <span>Meriem GASMI</span>" data-ar="تصميم وتطوير <span>مريم قاسمي</span>" data-en="Designed & developed by <span>Meriem GASMI</span>">Conçu & développé par <span>Meriem GASMI</span></div>
+  </div>
+</footer>
+
+<!-- MODAL -->
+<div class="mo" id="modal" onclick="closeMO(event)">
+  <div class="mo-box">
+    <button class="mo-close" onclick="closeMOBtn()">✕</button>
+    <div class="mo-img" id="moImg"><div class="mo-stock" id="moStock"></div></div>
+    <div class="mo-body">
+      <div class="mo-cat" id="moCat"></div>
+      <div class="mo-name" id="moName"></div>
+      <div class="mo-tabs">
+        <button class="mo-tab active" onclick="swTab(0)" data-fr="Description" data-ar="الوصف" data-en="Description">Description</button>
+        <button class="mo-tab" onclick="swTab(1)" data-fr="Ingrédients" data-ar="المكونات" data-en="Ingredients">Ingrédients</button>
+        <button class="mo-tab" onclick="swTab(2)" data-fr="Utilisation" data-ar="الاستخدام" data-en="Usage">Utilisation</button>
+      </div>
+      <div class="mo-tc active" id="tc0"></div>
+      <div class="mo-tc" id="tc1"></div>
+      <div class="mo-tc" id="tc2"></div>
+      <div class="mo-foot">
+        <div class="mo-price" id="moPrice"></div>
+        <div class="mo-btns" id="moBtns"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+const PRODS=[
+  {id:1,cat:'basics',sub:'soins',emoji:'✨',img:null,name:'Anti Spot Cream',badge:'best-seller',price:0,rupt:false,
+   desc:{fr:'Cible les taches pigmentaires et unifie le teint. Action concentrée pour une peau lumineuse.',ar:'يستهدف البقع التصبغية ويوحد لون البشرة.',en:'Targets pigmentation spots and evens skin tone.'},
+   ingr:{fr:'Acide kojique, Vitamine C, Niacinamide, Extrait de réglisse.',ar:'حمض الكوجيك، فيتامين C، نياسيناميد، مستخلص العرق سوس.',en:'Kojic acid, Vitamin C, Niacinamide, Licorice extract.'},
+   use:{fr:'Appliquer matin et soir sur les zones pigmentées après nettoyage. Éviter le contour des yeux.',ar:'يطبق صباحاً ومساءً على المناطق المصبغة بعد التنظيف.',en:'Apply morning and evening on pigmented areas after cleansing.'}},
+  {id:2,cat:'basics',sub:'soins',emoji:'🐌',img:null,name:'Snail Cream',badge:'trending',price:0,rupt:false,
+   desc:{fr:'Régénère, hydrate et réduit les cicatrices grâce à la bave d\'escargot pure.',ar:'يجدد ويرطب ويقلل الندوب بفضل مخاط الحلزون النقي.',en:'Regenerates, moisturizes and reduces scars with pure snail mucin.'},
+   ingr:{fr:'Filtrat de bave d\'escargot, Collagène, Acide hyaluronique, Allantoïne.',ar:'مستخلص مخاط الحلزون، كولاجين، حمض الهيالورونيك، ألانتوين.',en:'Snail mucus filtrate, Collagen, Hyaluronic acid, Allantoin.'},
+   use:{fr:'Appliquer sur le visage propre matin et soir. Masser jusqu\'à absorption.',ar:'يطبق على الوجه النظيف صباحاً ومساءً. تدليك حتى الامتصاص.',en:'Apply on clean face morning and evening. Massage until absorbed.'}},
+  {id:3,cat:'basics',sub:'soins',emoji:'💧',img:null,name:'Hydra-Deep Serum',badge:'premium',price:0,rupt:false,
+   desc:{fr:'Sérum hydratation intense pour un éclat durable. Formule légère non grasse.',ar:'سيروم ترطيب عميق لإشراق دائم. تركيبة خفيفة غير دهنية.',en:'Intensive hydration serum for lasting radiance. Light formula.'},
+   ingr:{fr:'Acide hyaluronique triple concentration, Peptides, Provitamine B5, Aloe vera.',ar:'حمض الهيالورونيك ثلاثي التركيز، ببتيدات، برو-فيتامين B5، ألوفيرا.',en:'Triple hyaluronic acid, Peptides, Provitamin B5, Aloe vera.'},
+   use:{fr:'Appliquer 2-3 gouttes sur le visage propre avant la crème hydratante.',ar:'ضع 2-3 قطرات على الوجه النظيف قبل الكريم.',en:'Apply 2-3 drops on clean face before moisturizer.'}},
+  {id:4,cat:'basics',sub:'soins',emoji:'🌿',img:null,name:'Aloe Vera Gel',badge:'naturel',price:0,rupt:false,
+   desc:{fr:'Apaise, hydrate et répare. Convient à tous types de peau, même sensibles.',ar:'يهدئ ويرطب ويصلح البشرة. مناسب لجميع أنواع البشرة.',en:'Soothes, moisturizes and repairs. Suitable for all skin types.'},
+   ingr:{fr:'Aloe barbadensis 98%, Glycérine végétale, Acide citrique.',ar:'الألوفيرا 98%، جليسرين نباتي، حمض الستريك.',en:'Aloe barbadensis 98%, Vegetable glycerin, Citric acid.'},
+   use:{fr:'Appliquer généreusement sur le visage ou le corps. Peut s\'utiliser seul ou sous crème.',ar:'ضع بسخاء على الوجه أو الجسم. يمكن استخدامه وحده أو تحت الكريم.',en:'Apply generously on face or body. Can be used alone or under cream.'}},
+  {id:5,cat:'basics',sub:'soins',emoji:'🫙',img:null,name:'Argan Oil',badge:'iconic',price:0,rupt:false,
+   desc:{fr:'L\'or liquide du Maghreb. Nourrit et protège le visage, corps et cheveux.',ar:'الذهب السائل من المغرب العربي. يغذي الوجه والجسم والشعر.',en:'Liquid gold of the Maghreb. Nourishes face, body and hair.'},
+   ingr:{fr:'Argania spinosa kernel oil 100%. Première pression à froid.',ar:'زيت نواة الأركان 100%. عصر بارد أول.',en:'Argania spinosa kernel oil 100%. First cold press.'},
+   use:{fr:'Visage : 2-4 gouttes. Corps : massage peau humide. Cheveux : quelques gouttes sur pointes.',ar:'الوجه: 2-4 قطرات. الجسم: تدليك على بشرة رطبة. الشعر: قطرات على الأطراف.',en:'Face: 2-4 drops. Body: damp skin massage. Hair: a few drops on ends.'}},
+  {id:6,cat:'basics',sub:'soins',emoji:'🌸',img:null,name:'Apaisante Cream',badge:'soin',price:0,rupt:false,
+   desc:{fr:'Calme rougeurs et irritations. Idéale pour peaux sensibles et réactives.',ar:'يهدئ الاحمرار والتهيجات. مثالي للبشرة الحساسة.',en:'Soothes redness and irritations. Ideal for sensitive skin.'},
+   ingr:{fr:'Eau thermale, Bisabolol, Extrait de camomille, Allantoin, Panthenol.',ar:'ماء حراري، بيسابولول، مستخلص البابونج، ألانتوين، بانثينول.',en:'Thermal water, Bisabolol, Chamomile extract, Allantoin, Panthenol.'},
+   use:{fr:'Appliquer matin et soir sur le visage nettoyé.',ar:'يطبق صباحاً ومساءً على الوجه المنظف.',en:'Apply morning and evening on cleansed face.'}},
+  {id:7,cat:'parfum',sub:'parf-femme',emoji:'🌺',img:null,name:'Perfume Girl',badge:'parfum',price:0,rupt:false,
+   desc:{fr:'Floral, frais et féminin. Une signature douce pour la femme moderne.',ar:'زهري ومنعش وأنثوي. توقيع ناعم للمرأة العصرية.',en:'Floral, fresh and feminine. A soft signature for the modern woman.'},
+   ingr:{fr:'Alcool dénaturé, Eau, Parfum (Fragrance).',ar:'كحول، ماء، عطر.',en:'Denatured alcohol, Water, Fragrance.'},
+   use:{fr:'-',ar:'-',en:'-'}},
+  {id:8,cat:'parfum',sub:'parf-femme',emoji:'🖤',img:null,name:'Perfume Insolite',badge:'parfum',price:0,rupt:false,
+   desc:{fr:'Audacieux, mystérieux et unique. Pour les femmes qui osent.',ar:'جريء وغامض وفريد. للنساء اللواتي يجرأن على التميز.',en:'Bold, mysterious and unique. For women who dare.'},
+   ingr:{fr:'Alcool dénaturé, Eau, Parfum (Fragrance).',ar:'كحول، ماء، عطر.',en:'Denatured alcohol, Water, Fragrance.'},
+   use:{fr:'-',ar:'-',en:'-'}},
+  {id:9,cat:'basics',sub:'soins',emoji:'⭐',img:null,name:'Miracle Cream',badge:'signature',price:0,rupt:false,
+   desc:{fr:'Multi-action : hydrate, répare et illumine. Le must-have absolu de la routine.',ar:'متعدد الإجراءات: يرطب ويصلح ويضيء. الأساسي في أي روتين.',en:'Multi-action: moisturizes, repairs and illuminates.'},
+   ingr:{fr:'Acide hyaluronique, Peptides, Niacinamide, Rétinol encapsulé, Beurre de karité.',ar:'حمض الهيالورونيك، ببتيدات، نياسيناميد، ريتينول مغلف، زبدة الشيا.',en:'Hyaluronic acid, Peptides, Niacinamide, Encapsulated retinol, Shea butter.'},
+   use:{fr:'Appliquer le soir sur le visage propre. Peut s\'utiliser comme masque nuit 2x/semaine.',ar:'يطبق مساءً على الوجه النظيف. يمكن استخدامه كقناع ليلي مرتين أسبوعياً.',en:'Apply evening on clean face. Can be used as a night mask 2x/week.'}}
+];
+
+const COUNTRIES=[
+  {f:'🇩🇿',n:'Algérie'},{f:'🇹🇳',n:'Tunisie'},{f:'🇱🇾',n:'Libye'},{f:'🇪🇬',n:'Égypte'},
+  {f:'🇨🇮',n:"Côte d'Ivoire"},{f:'🇧🇫',n:'Burkina Faso'},{f:'🇹🇬',n:'Togo'},
+  {f:'🇰🇼',n:'Koweït'},{f:'🇦🇪',n:'Émirats Arabes Unis'},{f:'🇴🇲',n:"Sultanat d'Oman"}
+];
+
+let lang='fr', cat='all', sub='all', sortV='default';
+
+function renderProds(list){
+  const g=document.getElementById('prodGrid');
+  if(!list.length){g.innerHTML=`<div style="grid-column:1/-1;text-align:center;padding:3rem;color:var(--gray)"><div style="font-size:3rem;margin-bottom:1rem">🔍</div><div>${lang==='fr'?'Aucun produit trouvé':lang==='ar'?'لا توجد نتائج':'No products found'}</div></div>`;return;}
+  g.innerHTML=list.map(p=>{
+    const sHtml=p.rupt
+      ?`<span class="spill s-out"><span class="sdot"></span>${lang==='fr'?'Rupture':lang==='ar'?'نفد المخزون':'Out of stock'}</span>`
+      :`<span class="spill s-in"><span class="sdot"></span>${lang==='fr'?'En stock':lang==='ar'?'متوفر':'In stock'}</span>`;
+    const bHtml=p.rupt
+      ?`<button class="pc-btn dis" disabled>${lang==='fr'?'Indisponible':lang==='ar'?'غير متاح':'Unavailable'}</button>`
+      :`<button class="pc-btn" onclick="event.stopPropagation();orderP('${p.name}')">${lang==='fr'?'Commander':lang==='ar'?'اطلب':'Order'}</button>`;
+    // Image or emoji
+    const imgHtml=p.img
+      ?`<img src="${p.img}" alt="${p.name}" loading="lazy">`
+      :`<div class="pc-img-placeholder">${p.emoji}</div>`;
+    return`<div class="pc${p.rupt?' rupt':''} reveal" onclick="openMO(${p.id})">
+      <div class="pc-img">${imgHtml}
+        <div class="pc-badges"><span class="badge-lbl">${p.badge}</span></div>
+        <div class="pc-quick">${lang==='fr'?'Voir détails':lang==='ar'?'التفاصيل':'Details'} →</div>
+      </div>
+      <div class="pc-body">
+        <div class="pc-top"><div class="pc-cat">${p.cat}</div>${sHtml}</div>
+        <h3 class="pc-name">${p.name}</h3>
+        <p class="pc-desc">${p.desc[lang]}</p>
+        <div class="pc-foot"><div class="pc-price${p.rupt?' rp':''}">${p.price>0?p.price:'—'} <small>DZD</small></div>${bHtml}</div>
+      </div>
+    </div>`;
+  }).join('');
+  observeR();
+}
+
+function renderCtry(){
+  document.getElementById('ctryGrid').innerHTML=COUNTRIES.map(c=>`<div class="ctry-card"><span class="ctry-flag">${c.f}</span>${c.n}</div>`).join('');
+}
+
+function filterCat(c){
+  cat=c; sub='all';
+  document.querySelectorAll('.cat-card').forEach(x=>x.classList.remove('active'));
+  document.querySelector(`[data-cat="${c}"]`).classList.add('active');
+  document.querySelectorAll('.subcat-row').forEach(r=>r.classList.remove('visible'));
+  if(['basics','maquillage','parfum'].includes(c)){
+    const r=document.getElementById(`sub-${c}`);
+    if(r){r.classList.add('visible');r.querySelectorAll('.sub-pill').forEach((p,i)=>p.classList.toggle('active',i===0));}
+  }
+  applyF();
+  document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function subFilter(c,s){
+  sub=s;
+  const r=document.getElementById(`sub-${c}`);
+  if(r) r.querySelectorAll('.sub-pill').forEach(p=>p.classList.toggle('active',p.getAttribute('data-sub')===s));
+  applyF();
+}
+
+function navF(target){
+  const mainMap={basics:'basics',nettoyage:'basics',soins:'basics','homme-soins':'basics',cheveux:'basics',maquillage:'maquillage','maq-visage':'maquillage','maq-levres':'maquillage',parfum:'parfum','parf-femme':'parfum','parf-homme':'parfum',complement:'complement',olymeal:'olymeal','parf-poche':'parf-poche'};
+  const main=mainMap[target]||target;
+  cat=main; sub=target===main?'all':target;
+  document.querySelectorAll('.cat-card').forEach(x=>x.classList.remove('active'));
+  const cc=document.querySelector(`[data-cat="${main}"]`);
+  if(cc) cc.classList.add('active');
+  document.querySelectorAll('.subcat-row').forEach(r=>r.classList.remove('visible'));
+  if(['basics','maquillage','parfum'].includes(main)){
+    const r=document.getElementById(`sub-${main}`);
+    if(r) r.classList.add('visible');
+  }
+  applyF();
+  document.getElementById('products').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function doFilter(){applyF();}
+function sortP(v){sortV=v;applyF();}
+
+function applyF(){
+  const q=document.getElementById('searchInput').value.toLowerCase();
+  let list=PRODS.filter(p=>{
+    if(cat==='all') return true;
+    if(sub!=='all'){
+      if(sub==='nettoyage') return p.sub==='nettoyage';
+      if(sub==='soins') return p.sub==='soins';
+      if(sub==='homme-soins') return p.sub==='homme-soins';
+      if(sub==='cheveux') return p.sub==='cheveux';
+      if(sub==='maq-visage') return p.sub==='maq-visage';
+      if(sub==='maq-levres') return p.sub==='maq-levres';
+      if(sub==='parf-femme') return p.sub==='parf-femme';
+      if(sub==='parf-homme') return p.sub==='parf-homme';
+      return p.cat===cat||p.sub===sub;
+    }
+    if(cat==='basics') return p.cat==='basics';
+    if(cat==='maquillage') return p.cat==='maquillage'||['maq-visage','maq-levres'].includes(p.sub);
+    return p.cat===cat;
+  }).filter(p=>!q||p.name.toLowerCase().includes(q)||p.desc[lang].toLowerCase().includes(q));
+  const sv=sortV||document.querySelector('.sort-sel').value;
+  if(sv==='stock') list.sort((a,b)=>a.rupt-b.rupt);
+  if(sv==='price-asc') list.sort((a,b)=>a.price-b.price);
+  if(sv==='price-desc') list.sort((a,b)=>b.price-a.price);
+  if(sv==='name') list.sort((a,b)=>a.name.localeCompare(b.name));
+  renderProds(list);
+}
+
+function openMO(id){
+  const p=PRODS.find(x=>x.id===id);
+  document.getElementById('moImg').innerHTML=p.img
+    ?`<img src="${p.img}" alt="${p.name}" style="width:100%;height:100%;object-fit:cover"><div class="mo-stock" id="moStock"></div>`
+    :`<span style="font-size:6rem">${p.emoji}</span><div class="mo-stock" id="moStock"></div>`;
+  document.getElementById('moStock').innerHTML=p.rupt
+    ?`<span class="spill s-out"><span class="sdot"></span>${lang==='fr'?'Rupture de stock':lang==='ar'?'نفد المخزون':'Out of stock'}</span>`
+    :`<span class="spill s-in"><span class="sdot"></span>${lang==='fr'?'En stock':lang==='ar'?'متوفر':'In stock'}</span>`;
+  document.getElementById('moCat').textContent=p.cat.toUpperCase();
+  document.getElementById('moName').textContent=p.name;
+  document.getElementById('tc0').textContent=p.desc[lang];
+  document.getElementById('tc1').textContent=p.ingr[lang];
+  const u=p.use[lang];
+  document.getElementById('tc2').innerHTML=u==='-'?`<em style="color:var(--gray-light)">${lang==='fr'?'Non applicable pour ce produit':lang==='ar'?'غير قابل للتطبيق':'Not applicable'}</em>`:u;
+  document.getElementById('moPrice').innerHTML=p.price>0?`${p.price} <span style="font-size:.9rem;color:var(--gray)">DZD</span>`:`— <span style="font-size:.9rem;color:var(--gray)">DZD</span>`;
+  const msg=encodeURIComponent(`${lang==='fr'?'Bonjour, je voudrais commander':lang==='ar'?'مرحباً، أريد طلب':'Hello, I would like to order'}: ${p.name}`);
+  document.getElementById('moBtns').innerHTML=p.rupt
+    ?`<div class="mo-rupt">⚠️ ${lang==='fr'?'Temporairement en rupture de stock':lang==='ar'?'غير متوفر مؤقتاً':'Temporarily out of stock'}</div>`
+    :`<a href="https://wa.me/213778671012?text=${msg}" class="mo-btn wa" target="_blank"><i class="fab fa-whatsapp"></i> WhatsApp</a>
+       <a href="https://instagram.com/arvea.velours.store" class="mo-btn ig" target="_blank"><i class="fab fa-instagram"></i> Instagram</a>
+       <a href="https://facebook.com/ArvaeVeloursStore" class="mo-btn fb" target="_blank"><i class="fab fa-facebook-f"></i> Facebook</a>
+       <a href="https://tiktok.com/@arvea.velours.store" class="mo-btn tk" target="_blank"><i class="fab fa-tiktok"></i> TikTok</a>`;
+  swTab(0);
+  document.getElementById('modal').classList.add('open');
+  document.body.style.overflow='hidden';
+}
+function closeMO(e){if(e.target===document.getElementById('modal'))closeMOBtn();}
+function closeMOBtn(){document.getElementById('modal').classList.remove('open');document.body.style.overflow='';}
+function swTab(i){
+  document.querySelectorAll('.mo-tab').forEach((t,j)=>t.classList.toggle('active',i===j));
+  document.querySelectorAll('.mo-tc').forEach((c,j)=>c.classList.toggle('active',i===j));
+}
+
+function orderP(name){
+  const msg=encodeURIComponent(`${lang==='fr'?'Bonjour, je voudrais commander':lang==='ar'?'مرحباً، أريد طلب':'Hello, I would like to order'}: ${name}`);
+  window.open(`https://wa.me/213778671012?text=${msg}`,'_blank');
+}
+
+function setLang(l){
+  lang=l;
+  document.documentElement.lang=l;
+  document.documentElement.dir=l==='ar'?'rtl':'ltr';
+  document.querySelectorAll('.lang-btn').forEach((b,i)=>b.classList.toggle('active',['fr','ar','en'][i]===l));
+  document.querySelectorAll('[data-fr]').forEach(el=>{
+    const t=el.getAttribute(`data-${l}`)||el.getAttribute('data-fr');
+    if(!t)return;
+    if(el.tagName==='INPUT'){el.placeholder=el.getAttribute(`data-${l}-placeholder`)||el.getAttribute('data-fr-placeholder')||'';}
+    else if(t.includes('<em>')||t.includes('<span>')){el.innerHTML=t;}
+    else{el.textContent=t;}
+  });
+  document.querySelectorAll('.sort-sel option').forEach(o=>{const t=o.getAttribute(`data-${l}`)||o.getAttribute('data-fr');if(t)o.textContent=t;});
+  const si=document.getElementById('searchInput');
+  si.placeholder=si.getAttribute(`data-${l}-placeholder`)||si.getAttribute('data-fr-placeholder');
+  applyF();
+}
+
+const cur=document.getElementById('cur'),curR=document.getElementById('curRing');
+document.addEventListener('mousemove',e=>{
+  cur.style.left=e.clientX+'px';cur.style.top=e.clientY+'px';
+  setTimeout(()=>{curR.style.left=e.clientX+'px';curR.style.top=e.clientY+'px';},70);
+});
+document.querySelectorAll('a,button,.pc,.cat-card').forEach(el=>{
+  el.addEventListener('mouseenter',()=>{cur.style.transform='translate(-50%,-50%) scale(2)';curR.style.transform='translate(-50%,-50%) scale(1.4)';});
+  el.addEventListener('mouseleave',()=>{cur.style.transform='translate(-50%,-50%) scale(1)';curR.style.transform='translate(-50%,-50%) scale(1)';});
+});
+
+function observeR(){
+  const obs=new IntersectionObserver(entries=>{entries.forEach((e,i)=>{if(e.isIntersecting)setTimeout(()=>e.target.classList.add('visible'),i*70);});},{threshold:.08});
+  document.querySelectorAll('.reveal:not(.visible)').forEach(el=>obs.observe(el));
+}
+
+renderProds(PRODS);
+renderCtry();
+observeR();
+
+// STAR RATING
+const stars=document.querySelectorAll('.star');
+const noteInput=document.getElementById('noteInput');
+let currentRating=0;
+stars.forEach(s=>{
+  s.addEventListener('mouseenter',()=>{
+    const v=+s.dataset.val;
+    stars.forEach(x=>x.classList.toggle('hover',+x.dataset.val<=v));
+  });
+  s.addEventListener('mouseleave',()=>{
+    stars.forEach(x=>x.classList.remove('hover'));
+  });
+  s.addEventListener('click',()=>{
+    currentRating=+s.dataset.val;
+    noteInput.value=currentRating+'/5';
+    stars.forEach(x=>x.classList.toggle('active',+x.dataset.val<=currentRating));
+  });
+});
+
+// FORM SUBMIT
+document.getElementById('avisForm').addEventListener('submit',async function(e){
+  e.preventDefault();
+  if(!currentRating){alert('Veuillez sélectionner une note.');return;}
+  const btn=document.getElementById('formSubmit');
+  const txt=document.getElementById('submitText');
+  const msg=document.getElementById('formMsg');
+  btn.disabled=true;txt.textContent='Envoi en cours...';
+  try{
+    const res=await fetch(this.action,{method:'POST',body:new FormData(this),headers:{Accept:'application/json'}});
+    if(res.ok){
+      msg.className='form-msg success';
+      msg.textContent='✓ Merci pour votre avis ! Nous l\'avons bien reçu.';
+      msg.style.display='block';
+      this.reset();stars.forEach(x=>x.classList.remove('active'));currentRating=0;
+      txt.textContent='Avis envoyé ✓';
+    } else {
+      throw new Error();
+    }
+  } catch{
+    msg.className='form-msg error';
+    msg.textContent='Une erreur est survenue. Veuillez réessayer.';
+    msg.style.display='block';
+    btn.disabled=false;txt.textContent='Envoyer mon avis';
+  }
+});
+</script>
+</body>
+</html>
